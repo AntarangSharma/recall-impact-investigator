@@ -10,6 +10,7 @@ from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.concurrency import run_in_threadpool
 
 from recall.agent import Investigator
 from recall.cli import paths
@@ -18,6 +19,7 @@ from recall.inventory import MAX_BYTES, InventoryError, export_csv, read_invento
 from recall.llm import load_local_env
 from recall.models import Identifier, display_guard
 from recall.sources import BRANDS, DATA, stale
+from recall.store import AnswerError, SourceChangedError
 
 ROOT = Path(__file__).parent
 load_local_env()
@@ -91,6 +93,7 @@ def view(identity: str) -> dict[str, Any]:
         "investigation": investigation,
         "rows": rows,
         "requests": store.requests(identity, True),
+        "active_request": agent.pending_request(identity),
         "sources": [{"snapshot": s, "stale": stale(s)} for s, _ in sources],
         "draft": draft[0] if draft else None,
         "events": events,
@@ -150,7 +153,7 @@ async def upload(
 ) -> Response:
     data = await file.read(MAX_BYTES + 1)
     await file.close()
-    identity = start(data, mode)
+    identity = await run_in_threadpool(start, data, mode)
     return RedirectResponse("/investigations/" + identity, 303)
 
 
@@ -178,6 +181,8 @@ def answer(
         raise HTTPException(409, "Source changed; review a new investigation before resuming.")
     try:
         agent.run(identity, {"request_id": request_id, "answer": answer})
+    except (AnswerError, SourceChangedError) as exc:
+        raise HTTPException(409, str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
     return RedirectResponse("/investigations/" + identity, 303)

@@ -6,7 +6,7 @@ Executed on October 27, 2026. This report separates deterministic behavior, live
 |---|---|
 | `make setup` | Passed with Python 3.12.13 on macOS; locked dependencies and Chromium installed |
 | `make check` | Formatting, lint, strict mypy for 11 source modules, and forbidden-character scan passed |
-| `RECALL_SCREENSHOTS=docs/screenshots make test` | 112 passed, including real Chromium and a server restart |
+| `RECALL_SCREENSHOTS=docs/screenshots make test` | 128 passed after recheck, including real Chromium, a server restart, and queued clarification questions |
 | `make eval-fixtures` | 60/60 fixed gold cases; 60/60 scripted-pipeline cases; exact-model baseline 41/60 |
 | `make refresh-data` | API discovery and complete HTML details retrieved for all 3 notices |
 | `make eval-live` | Explicitly not run: no locally configured OpenAI key; no live quality figure claimed |
@@ -31,6 +31,10 @@ The baseline has affected recall 21/21, affected precision 21/37, three incorrec
 Scripted extraction has 21/21 exact field groups and 11/11 valid rule/alias citations. The held-out scripted result is 7/7 fields and 1/1 citation. These are scripted-response checks, not live model scores. No key or model response was substituted with an invented result. The 90% live supported-field target remains unverified.
 
 ## Important exercised failures
+
+The post-delivery recheck found and fixed duplicate identifier requests across notices, out-of-order and repeated answers entering the wrong saved interrupt, and source-change errors losing their protected status on retry. Transactional source guards now prevent stale findings or drafts from being written. Sixteen new regression cases cover those paths, invalid answer recovery, malformed CSV headers and null characters, incorrect extracted brands, complete serial-range bounds, invalidated aggregation, and HTTP responsiveness during upload work. The real browser journey also covers two sequential identifier questions and replaying the first answer while the second is pending.
+
+The recheck reran formatting, lint, strict typing, the forbidden-character scan, all 128 tests, and the complete 60-case comparison. Fixed and scripted matching remain 60/60 with zero incorrect exclusions. Live inference remains unverified because the local key was still unavailable. The updated local application preserves the original three-row investigation and its pending Secura date-code question; it uses an available port because another application owns the earlier port.
 
 Tests cover grouped model/date rules, suffix and punctuation differences, missing/empty/malformed identifiers, numeric serial bounds, unsupported serial syntax, explicit exclusions, unsupported rules, invented quotes, wrong offsets, right quotes with wrong grouping or Boolean semantics, source changes, stale labels, retrieval errors/limits, redirect rejection, CSV formula injection, hostile source instructions, refusal/schema failures, model budget exhaustion, unsupported narrative claims, duplicate submissions, answer replay after a partial write, database/process restart, API exports, and browser clarification.
 

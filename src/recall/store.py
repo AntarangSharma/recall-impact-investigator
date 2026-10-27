@@ -8,12 +8,20 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from recall.models import Criteria, Finding, Snapshot, Stock
+from recall.models import Criteria, Finding, Identifier, Snapshot, Stock, normalized
 from recall.sources import URLS, digest, load_snapshot
 
 
 def now() -> str:
     return datetime.now(UTC).isoformat()
+
+
+class SourceChangedError(ValueError):
+    pass
+
+
+class AnswerError(ValueError):
+    pass
 
 
 class Store:
@@ -100,9 +108,27 @@ class Store:
 
     def status(self, identity: str, status: str, error: str | None = None) -> None:
         with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            if status != "source_changed":
+                self._require_current(db, identity)
             db.execute(
                 "UPDATE investigations SET status=?,error=? WHERE id=?", (status, error, identity)
             )
+
+    @staticmethod
+    def _require_current(db: sqlite3.Connection, identity: str) -> None:
+        state = db.execute("SELECT status FROM investigations WHERE id=?", (identity,)).fetchone()
+        changed = db.execute(
+            "SELECT 1 FROM investigation_sources i JOIN latest_snapshots l ON i.notice_id=l.notice_id "
+            "WHERE i.investigation_id=? AND i.source_hash!=l.source_hash LIMIT 1",
+            (identity,),
+        ).fetchone()
+        if changed or (state and state[0] == "source_changed"):
+            raise SourceChangedError("Source changed; create a new investigation before resuming.")
+
+    def require_current(self, identity: str) -> None:
+        with self.connect() as db:
+            self._require_current(db, identity)
 
     def stocks(self, identity: str, apply_answers: bool = True) -> list[Stock]:
         with self.connect() as db:
@@ -117,16 +143,25 @@ class Store:
             ).fetchall()
         stocks = [Stock.model_validate_json(r[0]) for r in rows]
         if apply_answers:
-            from recall.models import Identifier
-
             for stock in stocks:
-                for a in answers:
-                    if a["stock_id"] == stock.stock_id:
-                        setattr(stock, a["field"], Identifier.parse(a["answer"], a["field"]))
+                fields = {a["field"] for a in answers if a["stock_id"] == stock.stock_id}
+                for field in fields:
+                    values = [
+                        a["answer"]
+                        for a in answers
+                        if a["stock_id"] == stock.stock_id and a["field"] == field
+                    ]
+                    if len({normalized(v) for v in values}) > 1:
+                        identifier = Identifier(value=" / ".join(values), state="malformed")
+                        stock.issues.append(f"Conflicting investigation answers for {field}.")
+                    else:
+                        identifier = Identifier.parse(values[0], field)
+                    setattr(stock, field, identifier)
         return stocks
 
     def snapshot(self, snapshot: Snapshot, criteria: Criteria | None, promote: bool = True) -> None:
         with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
             old = db.execute(
                 "SELECT source_hash FROM latest_snapshots WHERE notice_id=?", (snapshot.notice_id,)
             ).fetchone()
@@ -146,6 +181,16 @@ class Store:
                     (snapshot.notice_id, snapshot.source_hash),
                 )
             if promote and old and old[0] != snapshot.source_hash:
+                affected = db.execute(
+                    "SELECT investigation_id FROM investigation_sources WHERE notice_id=? AND source_hash!=?",
+                    (snapshot.notice_id, snapshot.source_hash),
+                ).fetchall()
+                for investigation in affected:
+                    db.execute(
+                        "UPDATE investigations SET status='source_changed' WHERE id=?",
+                        (investigation[0],),
+                    )
+                    db.execute("DELETE FROM drafts WHERE investigation_id=?", (investigation[0],))
                 rows = db.execute(
                     "SELECT investigation_id,stock_id,payload FROM findings WHERE notice_id=?",
                     (snapshot.notice_id,),
@@ -167,6 +212,15 @@ class Store:
 
     def bind(self, identity: str, snapshot: Snapshot, criteria: Criteria | None) -> None:
         with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            self._require_current(db, identity)
+            latest = db.execute(
+                "SELECT source_hash FROM latest_snapshots WHERE notice_id=?", (snapshot.notice_id,)
+            ).fetchone()
+            if latest and latest[0] != snapshot.source_hash:
+                raise SourceChangedError(
+                    "Source changed before the notice could be bound to this investigation."
+                )
             db.execute(
                 "INSERT OR IGNORE INTO investigation_sources(investigation_id,notice_id,source_hash,criteria,retrieved_at) VALUES (?,?,?,?,?)",
                 (
@@ -198,6 +252,16 @@ class Store:
 
     def save_finding(self, identity: str, finding: Finding) -> None:
         with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            self._require_current(db, identity)
+            bound = db.execute(
+                "SELECT source_hash FROM investigation_sources WHERE investigation_id=? AND notice_id=?",
+                (identity, finding.notice_id),
+            ).fetchone()
+            if not bound or bound[0] != finding.source_hash:
+                raise SourceChangedError(
+                    "Finding does not refer to this investigation's bound source."
+                )
             db.execute(
                 "INSERT INTO findings VALUES (?,?,?,?,1) ON CONFLICT(investigation_id,stock_id,notice_id) "
                 "DO UPDATE SET payload=excluded.payload,revision=revision+1",
@@ -230,7 +294,7 @@ class Store:
         return [dict(r) for r in rows]
 
     def request(self, identity: str, finding: Finding, field: str) -> str:
-        key = digest(f"{identity}:{finding.stock_id}:{finding.notice_id}:{field}".encode())[:24]
+        key = digest(f"{identity}:{finding.stock_id}:{field}".encode())[:24]
         location = (
             "the silver label on the bottom of the unit"
             if field == "date_code"
@@ -240,27 +304,76 @@ class Store:
             f"What is the {field.replace('_', ' ')} for stock {finding.stock_id} on {location}?"
         )
         with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            self._require_current(db, identity)
+            existing = db.execute(
+                "SELECT id FROM requests WHERE investigation_id=? AND stock_id=? AND field=? "
+                "ORDER BY CASE status WHEN 'answered' THEN 0 WHEN 'pending' THEN 1 ELSE 2 END,id LIMIT 1",
+                (identity, finding.stock_id, field),
+            ).fetchone()
+            if existing:
+                return str(existing[0])
             db.execute(
                 "INSERT OR IGNORE INTO requests VALUES (?,?,?,?,?,?,NULL,'pending')",
                 (key, identity, finding.stock_id, finding.notice_id, field, question),
             )
         return key
 
-    def answer(self, identity: str, request_id: str, answer: str) -> dict[str, Any]:
-        from recall.models import Identifier
-
+    def reconcile_requests(self, identity: str) -> None:
         with self.connect() as db:
-            row = db.execute(
-                "SELECT * FROM requests WHERE id=? AND investigation_id=?", (request_id, identity)
-            ).fetchone()
-            if not row:
-                raise ValueError("Unknown identifier request.")
-            if Identifier.parse(answer, row["field"]).state != "present":
-                raise ValueError("Answer must be a valid identifier from the unit label.")
-            if row["status"] == "answered" and row["answer"] != answer:
-                raise ValueError("This request was already answered differently.")
+            db.execute("BEGIN IMMEDIATE")
+            self._require_current(db, identity)
+            required = {
+                (finding.stock_id, field)
+                for row in db.execute(
+                    "SELECT payload FROM findings WHERE investigation_id=?", (identity,)
+                )
+                for finding in [Finding.model_validate_json(row[0])]
+                if finding.valid
+                for field in finding.required_fields
+            }
+            for row in db.execute(
+                "SELECT id,stock_id,field FROM requests WHERE investigation_id=? AND status='pending'",
+                (identity,),
+            ).fetchall():
+                if (row["stock_id"], row["field"]) not in required:
+                    db.execute("UPDATE requests SET status='superseded' WHERE id=?", (row["id"],))
+
+    @staticmethod
+    def _answer_row(
+        db: sqlite3.Connection, identity: str, request_id: str, answer: str
+    ) -> sqlite3.Row:
+        row: sqlite3.Row | None = db.execute(
+            "SELECT * FROM requests WHERE id=? AND investigation_id=?", (request_id, identity)
+        ).fetchone()
+        if not row or row["status"] not in {"pending", "answered"}:
+            raise AnswerError("Identifier request is not pending or already answered.")
+        if Identifier.parse(answer, row["field"]).state != "present":
+            raise AnswerError("Answer must be a valid identifier from the unit label.")
+        previous = db.execute(
+            "SELECT answer FROM requests WHERE investigation_id=? AND stock_id=? AND field=? AND status='answered'",
+            (identity, row["stock_id"], row["field"]),
+        ).fetchall()
+        if any(normalized(r[0]) != normalized(answer) for r in previous):
+            raise AnswerError("This identifier was already answered differently.")
+        return row
+
+    def validate_answer(self, identity: str, request_id: str, answer: str) -> dict[str, Any]:
+        with self.connect() as db:
+            return dict(self._answer_row(db, identity, request_id, answer))
+
+    def answer(self, identity: str, request_id: str, answer: str) -> dict[str, Any]:
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            self._require_current(db, identity)
+            row = self._answer_row(db, identity, request_id, answer)
             db.execute(
-                "UPDATE requests SET answer=?,status='answered' WHERE id=?", (answer, request_id)
+                "UPDATE requests SET answer=?,status='answered' WHERE id=?",
+                (row["answer"] if row["status"] == "answered" else answer, request_id),
+            )
+            db.execute(
+                "UPDATE requests SET status='superseded' WHERE investigation_id=? AND stock_id=? AND field=? AND status='pending' AND id!=?",
+                (identity, row["stock_id"], row["field"], request_id),
             )
             db.execute(
                 "UPDATE investigations SET resumed=1,status='running' WHERE id=?", (identity,)
@@ -270,6 +383,8 @@ class Store:
     def draft(self, identity: str, body: str) -> None:
         hashes = [s.source_hash for s, _ in self.sources(identity)]
         with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            self._require_current(db, identity)
             db.execute(
                 "INSERT OR REPLACE INTO drafts VALUES (?,?,?)", (identity, body, json.dumps(hashes))
             )

@@ -103,6 +103,37 @@ def test_three_row_clarification_browser_restart(tmp_path: Path) -> None:
             page.set_viewport_size({"width": 390, "height": 844})
             page.goto(url + f"/investigations/{identity}")
             assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+            # Multiple stock units queue one actionable form at a time. A repeated earlier
+            # submission cannot accidentally resume the next unit's checkpoint.
+            data = b"stock_id,brand,model,date_code,location\nS1,Secura,SAF-53D,,A\nS2,Secura,SAF-53D,,B\n"
+            upload = page.request.post(
+                url + "/investigations",
+                multipart={"file": {"name": "two.csv", "mimeType": "text/csv", "buffer": data}},
+            )
+            page.goto(upload.url)
+            expect(page.locator(".answer-form")).to_have_count(1)
+            expect(
+                page.get_by_text("1 additional identifier question(s) are queued.", exact=False)
+            ).to_be_visible()
+            request_id = page.locator('input[name="request_id"]').input_value()
+            answer_url = page.locator(".answer-form").get_attribute("action")
+            page.get_by_label("What is the date code", exact=False).fill("1901")
+            page.get_by_role("button", name="Submit identifier and resume").click()
+            expect(page.locator(".answer-form")).to_have_count(1)
+            next_id = page.locator('input[name="request_id"]').input_value()
+            assert next_id != request_id
+            repeat = page.request.post(
+                url + str(answer_url), form={"request_id": request_id, "answer": "1901"}
+            )
+            assert repeat.status == 200
+            page.reload()
+            assert page.locator('input[name="request_id"]').input_value() == next_id
+            page.get_by_label("What is the date code", exact=False).fill("1902")
+            page.get_by_role("button", name="Submit identifier and resume").click()
+            expect(page.locator(".run-state")).to_have_text("Resumed / complete")
+            expect(page.locator(".answer-form")).to_have_count(0)
+            expect(page.locator(".stock-top .affected_by_notice")).to_have_count(1)
+            expect(page.locator(".stock-top .excluded_by_notice")).to_have_count(1)
             browser.close()
     finally:
         server.terminate()

@@ -22,7 +22,7 @@ def valid_span(span: Evidence, text: str) -> bool:
 
 
 def validate_criteria(criteria: Criteria, snapshot: Snapshot) -> None:
-    from recall.sources import URLS, digest, load_snapshot
+    from recall.sources import BRANDS, URLS, digest, load_snapshot
 
     if digest(snapshot.text.encode()) != snapshot.source_hash:
         raise EvidenceError("Snapshot content hash is invalid.")
@@ -33,6 +33,10 @@ def validate_criteria(criteria: Criteria, snapshot: Snapshot) -> None:
         raise EvidenceError(
             "Changed source requires a reviewed criteria profile before new exclusions."
         )
+    if snapshot.notice_id in BRANDS and normalized(criteria.brand) != normalized(
+        BRANDS[snapshot.notice_id]
+    ):
+        raise EvidenceError("Extracted brand does not match this notice's reviewed product brand.")
     for node in nodes(criteria.root):
         if not valid_span(node.evidence, snapshot.text):
             raise EvidenceError("Evidence does not match the immutable source span.")
@@ -62,12 +66,19 @@ def validate_criteria(criteria: Criteria, snapshot: Snapshot) -> None:
                 or not node.upper
                 or not node.lower.isascii()
                 or not node.lower.isdigit()
+                or not node.upper.isascii()
                 or not node.upper.isdigit()
                 or len(node.lower) != len(node.upper)
                 or int(node.lower) > int(node.upper)
-                or "serial" not in node.evidence.quote.lower()
-                or node.lower not in node.evidence.quote
-                or node.upper not in node.evidence.quote
+                or not re.search(
+                    r"\bserial numbers?\s+(?:from\s+)?"
+                    + re.escape(node.lower)
+                    + r"\s+(?:through|to)\s+"
+                    + re.escape(node.upper)
+                    + r"(?![A-Za-z0-9])",
+                    node.evidence.quote,
+                    re.I,
+                )
             ):
                 raise EvidenceError(
                     "Only explicitly cited fixed-width numeric serial ranges are supported."
@@ -211,7 +222,11 @@ def aggregate(findings: list[Finding]) -> str:
     active = [f for f in findings if f.valid]
     if any(f.status == "affected_by_notice" for f in active):
         return "affected_by_notice"
-    if not active or any(f.status == "needs_information" for f in active):
+    if (
+        len(active) != len(findings)
+        or not active
+        or any(f.status == "needs_information" for f in active)
+    ):
         return "needs_information"
     return "excluded_by_notice"
 

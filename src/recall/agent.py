@@ -14,7 +14,7 @@ from recall.criteria import match
 from recall.llm import Adapter, Choice, ModelError
 from recall.models import Finding, display_guard
 from recall.sources import BRANDS, URLS, discover, fetch, load_snapshot, parse_html
-from recall.store import Store
+from recall.store import AnswerError, SourceChangedError, Store
 
 LOCK = threading.RLock()
 
@@ -109,24 +109,32 @@ class Investigator:
     def compute(
         self, identity: str, only_stock: str | None = None, field: str | None = None
     ) -> None:
+        self.store.require_current(identity)
+        sources = self.store.sources(identity)
+        previous = {(f.stock_id, f.notice_id): f for f in self.store.findings(identity)}
         for stock in self.store.stocks(identity):
             if only_stock and stock.stock_id != only_stock:
                 continue
-            for snapshot, criteria in self.store.sources(identity):
-                old = next(
-                    (
-                        f
-                        for f in self.store.findings(identity)
-                        if f.stock_id == stock.stock_id and f.notice_id == snapshot.notice_id
-                    ),
-                    None,
-                )
+            for snapshot, criteria in sources:
+                old = previous.get((stock.stock_id, snapshot.notice_id))
                 if field and old and field not in old.required_fields:
                     continue
                 finding = match(stock, snapshot, criteria)
                 self.store.save_finding(identity, finding)
                 for missing in finding.required_fields:
                     self.store.request(identity, finding, missing)
+        self.store.reconcile_requests(identity)
+
+    def pending_request(self, identity: str) -> dict[str, Any] | None:
+        with LOCK:
+            state = self.graph.get_state({"configurable": {"thread_id": identity}})
+            if (
+                "clarify" not in state.next
+                or self.store.investigation(identity)["status"] != "waiting_for_identifier"
+            ):
+                return None
+            target = state.values.get("action", {}).get("target")
+            return next((r for r in self.store.requests(identity, True) if r["id"] == target), None)
 
     def tool(self, state: State) -> dict[str, Any]:
         identity = state["investigation_id"]
@@ -212,24 +220,28 @@ class Investigator:
         config: RunnableConfig = {"configurable": {"thread_id": identity}, "recursion_limit": 60}
         with LOCK:
             try:
+                self.store.require_current(identity)
                 current = self.graph.get_state(config)
                 if answer:
-                    if self.store.investigation(identity)["status"] == "source_changed":
-                        raise ValueError(
-                            "Source changed; create a new investigation before resuming."
+                    row = self.store.validate_answer(
+                        identity, answer.get("request_id", ""), answer.get("answer", "")
+                    )
+                    active_id = (
+                        current.values.get("action", {}).get("target")
+                        if "clarify" in current.next
+                        else None
+                    )
+                    if row["status"] == "answered" and active_id != row["id"]:
+                        # Duplicate POST after progression must not resume a different interrupt.
+                        if current.next and active_id is None:
+                            self.graph.invoke(None, config)
+                        return
+                    if active_id != row["id"]:
+                        raise AnswerError(
+                            "Answer the currently displayed identifier question first."
                         )
-                    pending = self.store.requests(identity, True)
-                    if not any(r["id"] == answer.get("request_id") for r in pending):
-                        answered = self.store.requests(identity)
-                        if any(
-                            r["id"] == answer.get("request_id")
-                            and r["answer"] == answer.get("answer")
-                            for r in answered
-                        ):
-                            if not current.next:
-                                return
-                        else:
-                            raise ValueError("Request is not pending.")
+                    # Check before Command(resume), because its payload is checkpointed even if
+                    # the resumed node later rejects it.
                     self.graph.invoke(Command(resume=answer), config)
                 elif not current.values:
                     initial: State = {
@@ -248,6 +260,12 @@ class Investigator:
                     and self.store.investigation(identity)["status"] != "waiting_for_identifier"
                 ):
                     self.graph.invoke(None, config)
+            except AnswerError:
+                raise
+            except SourceChangedError as exc:
+                self.store.status(identity, "source_changed", str(exc))
+                self.store.event(identity, "source-changed", "source_changed", str(exc))
+                raise
             except Exception as exc:
                 self.store.status(identity, "failed", f"{type(exc).__name__}: {exc}")
                 self.store.event(identity, "failure", "failed", type(exc).__name__)

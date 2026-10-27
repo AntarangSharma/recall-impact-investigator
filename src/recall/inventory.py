@@ -21,8 +21,13 @@ def read_inventory(data: bytes) -> list[Stock]:
         display_guard(text)
     except (UnicodeDecodeError, ValueError) as exc:
         raise InventoryError("Use UTF-8 text without forbidden display punctuation.") from exc
+    if "\x00" in text:
+        raise InventoryError("CSV contains a null character; use ordinary text identifiers.")
     reader = csv.DictReader(io.StringIO(text), strict=True)
-    headers = reader.fieldnames or []
+    try:
+        headers = reader.fieldnames or []
+    except csv.Error as exc:
+        raise InventoryError(f"Malformed CSV header: {exc}") from exc
     if len(headers) != len(set(headers)) or not REQUIRED <= set(headers) or set(headers) - HEADERS:
         raise InventoryError(
             "Headers must be unique, supported, and include stock_id,brand,model,location."
