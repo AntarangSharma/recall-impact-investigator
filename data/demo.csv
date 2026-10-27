@@ -1,0 +1,4 @@
+stock_id,brand,model,date_code,serial_number,location
+SEC-001,Secura,SAF-53D,1901,,Stockroom A
+SEC-002,Secura,SAF-53D,1902,,Stockroom A
+SEC-003,Secura,SAF-53D,,,Sales floor

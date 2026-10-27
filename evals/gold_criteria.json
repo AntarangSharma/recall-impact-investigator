@@ -1,0 +1,26 @@
+{
+  "23794": {
+    "brand": "Secura",
+    "groups": [
+      {"models": ["SAF-53D"], "date_codes": ["1901"]},
+      {"models": ["SAF-53"], "date_codes": ["1903", "1904"]}
+    ],
+    "aliases": {"TXG-DT16E": "SAF-53D", "TXG-DS16": "SAF-53"},
+    "evidence_contains": ["SAF-53D (TXG-DT16E) with date code 1901", "SAF-53 (TXG-DS16) with date codes 1903 and 1904"],
+    "rationale": "CPSC description explicitly pairs each model with its own code set. Parenthetical identifiers are supported aliases. Sale period is not an identifier rule."
+  },
+  "23130": {
+    "brand": "Cosori",
+    "groups": [{"models": ["CP158-AF", "CP158-AF-R19", "CP158-AF-RXW", "CP158-AF-RXR", "CAF-P581-BUSR", "CAF-P581-AUSR", "CAF-P581-RUSR", "CP137-AF", "CP137-AF-RXB", "CP137-AF-RXR", "CP137-AF-RXW", "CS158-AF", "CS158-AF-RXB", "CS158-AF-R19", "CAF-P581S-BUSR", "CAF-P581S-RUSR", "CAF-P581S-AUSR", "CO137-AF", "CO158-AF", "CO158-AF-RXB", "CP258-AF"], "date_codes": []}],
+    "aliases": {},
+    "evidence_contains": ["This recall involves Cosori air fryers with model numbers"],
+    "rationale": "Exact enumeration in Description, including meaningful suffixes; no code or serial constraint."
+  },
+  "24159": {
+    "brand": "Insignia",
+    "groups": [{"models": ["NS-AF34D2", "NS-AF5DSS2", "NS-AF5MSS2", "NS-AF8DBD2", "NS-AF10DBK2", "NS-AF10DSS2"], "date_codes": []}],
+    "aliases": {},
+    "evidence_contains": ["model numbers NS-AF34D2, NS-AF5DSS2, NS-AF5MSS2, NS-AF8DBD2, NS-AF10DBK2, and NS-AF10DSS2"],
+    "rationale": "Six explicit models in the 2024 notice; not the different 2022 recall. No date-code restriction."
+  }
+}

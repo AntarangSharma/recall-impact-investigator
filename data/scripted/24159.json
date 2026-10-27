@@ -1,0 +1,30 @@
+{
+  "source_hash": "31c4a560ba9baa3a6d97fbf1230ad258ed8a707ff7cfc1a457f98aa9ee359aa8",
+  "mode": "scripted_fixture",
+  "criteria": {
+    "brand": "Insignia",
+    "root": {
+      "op": "model_set",
+      "values": [
+        "NS-AF34D2",
+        "NS-AF5DSS2",
+        "NS-AF5MSS2",
+        "NS-AF8DBD2",
+        "NS-AF10DBK2",
+        "NS-AF10DSS2"
+      ],
+      "children": [],
+      "evidence": {
+        "start": 1046,
+        "end": 1207,
+        "quote": "This recall involves Insignia Air Fryers and Insignia Air Fryer Ovens, model numbers NS-AF34D2, NS-AF5DSS2, NS-AF5MSS2, NS-AF8DBD2, NS-AF10DBK2, and NS-AF10DSS2."
+      },
+      "lower": null,
+      "upper": null,
+      "reason": null
+    },
+    "aliases": [],
+    "complete": true,
+    "unsupported": []
+  }
+}

@@ -1,0 +1,1 @@
+{"development_notices": ["23794", "23130"], "held_out_notice": "24159", "held_out_cases": 20, "reserved_before_prompt": true, "scope": "Notice-level prompt-tuning holdout; inspected during independent gold preparation. Small synthetic evaluation, not production validation."}

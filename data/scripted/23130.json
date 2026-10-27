@@ -1,0 +1,45 @@
+{
+  "source_hash": "f34139e9bc31794d497325b6ceeecb6a8c949b68dd3b0a8095901e4eaebac2ba",
+  "mode": "scripted_fixture",
+  "criteria": {
+    "brand": "Cosori",
+    "root": {
+      "op": "model_set",
+      "values": [
+        "CP158-AF",
+        "CP158-AF-R19",
+        "CP158-AF-RXW",
+        "CP158-AF-RXR",
+        "CAF-P581-BUSR",
+        "CAF-P581-AUSR",
+        "CAF-P581-RUSR",
+        "CP137-AF",
+        "CP137-AF-RXB",
+        "CP137-AF-RXR",
+        "CP137-AF-RXW",
+        "CS158-AF",
+        "CS158-AF-RXB",
+        "CS158-AF-R19",
+        "CAF-P581S-BUSR",
+        "CAF-P581S-RUSR",
+        "CAF-P581S-AUSR",
+        "CO137-AF",
+        "CO158-AF",
+        "CO158-AF-RXB",
+        "CP258-AF"
+      ],
+      "children": [],
+      "evidence": {
+        "start": 1178,
+        "end": 1514,
+        "quote": "This recall involves Cosori air fryers with model numbers CP158-AF, CP158-AF-R19, CP158-AF-RXW, CP158-AF-RXR, CAF-P581-BUSR, CAF-P581-AUSR, CAF-P581-RUSR, CP137-AF, CP137-AF-RXB, CP137-AF-RXR, CP137-AF-RXW, CS158-AF, CS158-AF-RXB, CS158-AF-R19, CAF-P581S-BUSR, CAF-P581S-RUSR, CAF-P581S-AUSR, CO137-AF, CO158-AF, CO158-AF-RXB, CP258-AF."
+      },
+      "lower": null,
+      "upper": null,
+      "reason": null
+    },
+    "aliases": [],
+    "complete": true,
+    "unsupported": []
+  }
+}

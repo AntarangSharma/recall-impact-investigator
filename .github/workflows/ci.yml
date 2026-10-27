@@ -1,0 +1,35 @@
+name: deterministic checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.9"
+          python-version: "3.12"
+      - run: uv sync --frozen
+      - run: uv run playwright install --with-deps chromium
+      - run: make check
+      - run: make test
+      - run: make eval-fixtures
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixture-evaluation
+          path: evals/results-fixtures.json
+      - run: docker build -t recall-impact-investigator:ci .
+      - run: |
+          docker run -d --name recall-ci recall-impact-investigator:ci
+          for attempt in $(seq 1 30); do
+            if docker exec recall-ci python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"; then break; fi
+            sleep 1
+          done
+          docker exec recall-ci python scripts/container_smoke.py
+          docker exec recall-ci python -m recall.cli eval-fixtures
+      - if: always()
+        run: docker rm -f recall-ci || true

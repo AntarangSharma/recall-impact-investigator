@@ -1,0 +1,132 @@
+{
+  "source_hash": "b1b9badaba24cf23c923f4c0acf48cdb4ee4fdbfe3a8d1907708a12f9d2e9087",
+  "mode": "scripted_fixture",
+  "criteria": {
+    "brand": "Secura",
+    "root": {
+      "op": "any",
+      "values": [],
+      "children": [
+        {
+          "op": "all",
+          "values": [],
+          "children": [
+            {
+              "op": "model_set",
+              "values": [
+                "SAF-53D"
+              ],
+              "children": [],
+              "evidence": {
+                "start": 429,
+                "end": 592,
+                "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+              },
+              "lower": null,
+              "upper": null,
+              "reason": null
+            },
+            {
+              "op": "date_code_set",
+              "values": [
+                "1901"
+              ],
+              "children": [],
+              "evidence": {
+                "start": 429,
+                "end": 592,
+                "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+              },
+              "lower": null,
+              "upper": null,
+              "reason": null
+            }
+          ],
+          "evidence": {
+            "start": 429,
+            "end": 592,
+            "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+          },
+          "lower": null,
+          "upper": null,
+          "reason": null
+        },
+        {
+          "op": "all",
+          "values": [],
+          "children": [
+            {
+              "op": "model_set",
+              "values": [
+                "SAF-53"
+              ],
+              "children": [],
+              "evidence": {
+                "start": 429,
+                "end": 592,
+                "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+              },
+              "lower": null,
+              "upper": null,
+              "reason": null
+            },
+            {
+              "op": "date_code_set",
+              "values": [
+                "1903",
+                "1904"
+              ],
+              "children": [],
+              "evidence": {
+                "start": 429,
+                "end": 592,
+                "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+              },
+              "lower": null,
+              "upper": null,
+              "reason": null
+            }
+          ],
+          "evidence": {
+            "start": 429,
+            "end": 592,
+            "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+          },
+          "lower": null,
+          "upper": null,
+          "reason": null
+        }
+      ],
+      "evidence": {
+        "start": 429,
+        "end": 592,
+        "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+      },
+      "lower": null,
+      "upper": null,
+      "reason": null
+    },
+    "aliases": [
+      {
+        "canonical": "SAF-53D",
+        "alias": "TXG-DT16E",
+        "evidence": {
+          "start": 429,
+          "end": 592,
+          "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+        }
+      },
+      {
+        "canonical": "SAF-53",
+        "alias": "TXG-DS16",
+        "evidence": {
+          "start": 429,
+          "end": 592,
+          "quote": "This recall involves Secura air fryers with model number SAF-53D (TXG-DT16E) with date code 1901, and model number SAF-53 (TXG-DS16) with date codes 1903 and 1904."
+        }
+      }
+    ],
+    "complete": true,
+    "unsupported": []
+  }
+}

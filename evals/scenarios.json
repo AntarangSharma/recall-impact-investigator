@@ -1,0 +1,1042 @@
+[
+  {
+    "case_id": "23794-01",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-01",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Exact first model and its stated code",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-02",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-02",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": "1903",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "1903 belongs to the other model",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-03",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-03",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "date_code"
+    ],
+    "rationale": "First model requires date_code",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-04",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-04",
+      "brand": "Secura",
+      "model": "SAF-53",
+      "date_code": "1903",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Exact second model and first allowed code",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-05",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-05",
+      "brand": "Secura",
+      "model": "SAF-53",
+      "date_code": "1904",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Exact second model and second allowed code",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-06",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-06",
+      "brand": "Secura",
+      "model": "TXG-DT16E",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Source parenthetical alias",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-07",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-07",
+      "brand": "Secura",
+      "model": "TXG-DS16",
+      "date_code": "1904",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Source parenthetical alias",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-08",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-08",
+      "brand": "Secura",
+      "model": " saf-53d ",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Outer whitespace and case normalization",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-09",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-09",
+      "brand": "Secura",
+      "model": "SAF-53D (TXG-DT16E)",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Full source model notation",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-10",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-10",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": "1904",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Other model code is not transferable",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-11",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-11",
+      "brand": "Secura",
+      "model": "SAF-53",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "First model code is not transferable",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-12",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-12",
+      "brand": "Secura",
+      "model": "SAF-53D-X",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Suffix changes identifier",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-13",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-13",
+      "brand": "Secura",
+      "model": "SAF-53DX",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Near suffix is a different identifier",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-14",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-14",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": "0190",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Leading zero preserved and outside stated set",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-15",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-15",
+      "brand": "Secura",
+      "model": "SAF-53",
+      "date_code": "1902",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Code outside second model set",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-16",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-16",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": "",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "date_code"
+    ],
+    "rationale": "Empty code is not missing column and still needs information",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-17",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-17",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": "19O1",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "date_code"
+    ],
+    "rationale": "Letter O is not numeric code",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-18",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-18",
+      "brand": "Secura",
+      "model": "SAF-53D / SAF-53",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "model"
+    ],
+    "rationale": "Conflicting models",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23794-19",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-19",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [],
+    "rationale": "Incomplete source variant",
+    "condition": "incomplete"
+  },
+  {
+    "case_id": "23794-20",
+    "notice_id": "23794",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23794-20",
+      "brand": "Secura",
+      "model": "SAF-53D",
+      "date_code": "1901",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [],
+    "rationale": "Unsupported condition variant",
+    "condition": "unsupported"
+  },
+  {
+    "case_id": "23130-01",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-01",
+      "brand": "Cosori",
+      "model": "CP158-AF",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed exact model",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-02",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-02",
+      "brand": "Cosori",
+      "model": "CP158-AF-R19",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-03",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-03",
+      "brand": "Cosori",
+      "model": "CP137-AF-RXB",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-04",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-04",
+      "brand": "Cosori",
+      "model": "CAF-P581S-RUSR",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed S variant",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-05",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-05",
+      "brand": "Cosori",
+      "model": "CO158-AF-RXB",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed CO suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-06",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-06",
+      "brand": "Cosori",
+      "model": " cp258-af ",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Case and whitespace",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-07",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-07",
+      "brand": "Cosori",
+      "model": "CAF-P581-AUSR",
+      "date_code": "0001",
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Code is not required in this notice",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-08",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-08",
+      "brand": "Cosori",
+      "model": "CP158-AF-R20",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Unlisted suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-09",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-09",
+      "brand": "Cosori",
+      "model": "CP158-AF-X",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Unlisted suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-10",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-10",
+      "brand": "Cosori",
+      "model": "CP137AF",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Meaningful hyphen removed",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-11",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-11",
+      "brand": "Cosori",
+      "model": "CAF-P581S-XUSR",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Wrong region suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-12",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-12",
+      "brand": "Cosori",
+      "model": "CO158-AF-R19",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Unlisted CO suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-13",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-13",
+      "brand": "Cosori",
+      "model": "CS158-AF-RXR",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Unlisted CS suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-14",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-14",
+      "brand": "Cosori",
+      "model": "CP258-AF2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Near model only",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-15",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-15",
+      "brand": "Cosori",
+      "model": "",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "model"
+    ],
+    "rationale": "Empty model",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-16",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-16",
+      "brand": "Cosori",
+      "model": null,
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "model"
+    ],
+    "rationale": "Missing model",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-17",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-17",
+      "brand": "Cosori",
+      "model": "CP158-AF / CS158-AF",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "model"
+    ],
+    "rationale": "Conflicting models",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-18",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-18",
+      "brand": "Secura",
+      "model": "CP158-AF",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [],
+    "rationale": "Brand conflicts with model",
+    "condition": "normal"
+  },
+  {
+    "case_id": "23130-19",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-19",
+      "brand": "Cosori",
+      "model": "CP158-AF",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [],
+    "rationale": "Incomplete source variant",
+    "condition": "incomplete"
+  },
+  {
+    "case_id": "23130-20",
+    "notice_id": "23130",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-23130-20",
+      "brand": "Cosori",
+      "model": "CP158-AF",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [],
+    "rationale": "Unsupported condition variant",
+    "condition": "unsupported"
+  },
+  {
+    "case_id": "24159-01",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-01",
+      "brand": "Insignia",
+      "model": "NS-AF34D2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed fryer",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-02",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-02",
+      "brand": "Insignia",
+      "model": "NS-AF5DSS2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed fryer",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-03",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-03",
+      "brand": "Insignia",
+      "model": "NS-AF5MSS2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed fryer",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-04",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-04",
+      "brand": "Insignia",
+      "model": "NS-AF8DBD2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed dual basket",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-05",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-05",
+      "brand": "Insignia",
+      "model": "NS-AF10DBK2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed black oven",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-06",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-06",
+      "brand": "Insignia",
+      "model": "NS-AF10DSS2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Listed steel oven",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-07",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-07",
+      "brand": "Insignia",
+      "model": " ns-af34d2 ",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "affected_by_notice",
+    "expected_request": [],
+    "rationale": "Case and whitespace",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-08",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-08",
+      "brand": "Insignia",
+      "model": "NS-AF34D2-X",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Unlisted suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-09",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-09",
+      "brand": "Insignia",
+      "model": "NS-AF34D1",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Different model generation",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-10",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-10",
+      "brand": "Insignia",
+      "model": "NS-AF5DSS",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Missing suffix digit",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-11",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-11",
+      "brand": "Insignia",
+      "model": "NSAF34D2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Meaningful hyphens removed",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-12",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-12",
+      "brand": "Insignia",
+      "model": "NS-AF10DBK2S",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Unlisted suffix",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-13",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-13",
+      "brand": "Insignia",
+      "model": "NS-AF8DBD20",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Near model with extra zero",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-14",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-14",
+      "brand": "Insignia",
+      "model": "NS-AF10DSS3",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "excluded_by_notice",
+    "expected_request": [],
+    "rationale": "Different generation",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-15",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-15",
+      "brand": "Insignia",
+      "model": "",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "model"
+    ],
+    "rationale": "Empty model",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-16",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-16",
+      "brand": "Insignia",
+      "model": null,
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "model"
+    ],
+    "rationale": "Missing model",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-17",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-17",
+      "brand": "Insignia",
+      "model": "NS-AF34D2 / NS-AF5DSS2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [
+      "model"
+    ],
+    "rationale": "Conflicting models",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-18",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-18",
+      "brand": "Cosori",
+      "model": "NS-AF34D2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [],
+    "rationale": "Brand conflicts with model",
+    "condition": "normal"
+  },
+  {
+    "case_id": "24159-19",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-19",
+      "brand": "Insignia",
+      "model": "NS-AF34D2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [],
+    "rationale": "Incomplete source variant",
+    "condition": "incomplete"
+  },
+  {
+    "case_id": "24159-20",
+    "notice_id": "24159",
+    "synthetic": true,
+    "stock": {
+      "stock_id": "SYN-24159-20",
+      "brand": "Insignia",
+      "model": "NS-AF34D2",
+      "date_code": null,
+      "serial_number": null,
+      "location": "Synthetic shelf A"
+    },
+    "expected": "needs_information",
+    "expected_request": [],
+    "rationale": "Unsupported condition variant",
+    "condition": "unsupported"
+  }
+]
