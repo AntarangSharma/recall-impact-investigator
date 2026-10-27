@@ -294,3 +294,48 @@ def test_model_explanations_cannot_contradict_findings(
         adapter.narrative(
             {"unit:notice": "Validated affected finding"}, {"unit:notice": "affected_by_notice"}
         )
+
+
+def test_changed_source_gets_new_id_and_cannot_revive_fixture(
+    workflow: tuple[Store, Path, str],
+) -> None:
+    store, cp, identity = workflow
+    a = Investigator(store, cp)
+    a.run(identity)
+    source = load_snapshot("23794").model_copy(deep=True)
+    source.text += " Official source update."
+    source.source_hash = digest(source.text.encode())
+    store.snapshot(source, None)
+    data = (DATA / "demo.csv").read_bytes()
+    new_id, fresh = store.create(data, read_inventory(data), "fixture")
+    assert fresh and new_id != identity
+    with pytest.raises(ModelError, match="superseded"):
+        a.run(new_id)
+    assert not store.findings(new_id)
+    a.close()
+
+
+def test_each_investigation_retains_observed_retrieval_time(
+    workflow: tuple[Store, Path, str],
+) -> None:
+    store, cp, identity = workflow
+    a = Investigator(store, cp)
+    a.run(identity)
+    original = load_snapshot("23794")
+    later = original.model_copy(update={"retrieved_at": "2026-10-28T00:00:00+00:00"})
+    data = (DATA / "demo.csv").read_bytes()
+    other, _ = store.create(data, read_inventory(data), "live")
+    with store.connect() as db:
+        raw = db.execute(
+            "SELECT criteria FROM investigation_sources WHERE investigation_id=? AND notice_id='23794'",
+            (identity,),
+        ).fetchone()[0]
+    from recall.models import Criteria
+
+    store.bind(other, later, Criteria.model_validate_json(raw))
+    assert store.sources(other)[0][0].retrieved_at == later.retrieved_at
+    assert (
+        next(s for s, _ in store.sources(identity) if s.notice_id == "23794").retrieved_at
+        == original.retrieved_at
+    )
+    a.close()

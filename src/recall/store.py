@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from recall.models import Criteria, Finding, Snapshot, Stock
-from recall.sources import digest
+from recall.sources import URLS, digest, load_snapshot
 
 
 def now() -> str:
@@ -35,7 +35,7 @@ class Store:
             CREATE TABLE IF NOT EXISTS latest_snapshots (notice_id TEXT PRIMARY KEY, source_hash TEXT);
             CREATE TABLE IF NOT EXISTS investigation_sources (
               investigation_id TEXT, notice_id TEXT, source_hash TEXT,
-              criteria TEXT, PRIMARY KEY(investigation_id,notice_id));
+              criteria TEXT, retrieved_at TEXT, PRIMARY KEY(investigation_id,notice_id));
             CREATE TABLE IF NOT EXISTS findings (
               investigation_id TEXT, stock_id TEXT, notice_id TEXT, payload TEXT, revision INTEGER,
               PRIMARY KEY(investigation_id,stock_id,notice_id));
@@ -59,6 +59,8 @@ class Store:
                     "WHERE s.notice_id=investigation_sources.notice_id "
                     "AND s.source_hash=investigation_sources.source_hash)"
                 )
+            if "retrieved_at" not in columns:
+                db.execute("ALTER TABLE investigation_sources ADD COLUMN retrieved_at TEXT")
 
     @contextmanager
     def connect(self) -> Iterator[sqlite3.Connection]:
@@ -72,9 +74,11 @@ class Store:
             db.close()
 
     def create(self, data: bytes, stocks: list[Stock], mode: str) -> tuple[str, bool]:
-        upload_hash = digest(data + mode.encode())
-        identity = upload_hash[:24]
         with self.connect() as db:
+            versions = dict(db.execute("SELECT notice_id,source_hash FROM latest_snapshots"))
+            coverage = ":".join(versions.get(n, load_snapshot(n).source_hash) for n in sorted(URLS))
+            upload_hash = digest(data + mode.encode() + coverage.encode())
+            identity = upload_hash[:24]
             result = db.execute(
                 "INSERT OR IGNORE INTO investigations VALUES (?,?,?,?,?,?,0)",
                 (identity, upload_hash, mode, "running", now(), None),
@@ -164,26 +168,29 @@ class Store:
     def bind(self, identity: str, snapshot: Snapshot, criteria: Criteria | None) -> None:
         with self.connect() as db:
             db.execute(
-                "INSERT OR IGNORE INTO investigation_sources(investigation_id,notice_id,source_hash,criteria) VALUES (?,?,?,?)",
+                "INSERT OR IGNORE INTO investigation_sources(investigation_id,notice_id,source_hash,criteria,retrieved_at) VALUES (?,?,?,?,?)",
                 (
                     identity,
                     snapshot.notice_id,
                     snapshot.source_hash,
                     criteria.model_dump_json() if criteria else None,
+                    snapshot.retrieved_at,
                 ),
             )
 
     def sources(self, identity: str) -> list[tuple[Snapshot, Criteria | None]]:
         with self.connect() as db:
             rows = db.execute(
-                "SELECT s.payload,i.criteria FROM snapshots s JOIN investigation_sources i "
+                "SELECT s.payload,i.criteria,i.retrieved_at FROM snapshots s JOIN investigation_sources i "
                 "ON s.notice_id=i.notice_id AND s.source_hash=i.source_hash "
                 "WHERE i.investigation_id=? ORDER BY i.notice_id",
                 (identity,),
             ).fetchall()
         return [
             (
-                Snapshot.model_validate_json(r[0]),
+                Snapshot.model_validate_json(r[0]).model_copy(update={"retrieved_at": r[2]})
+                if r[2]
+                else Snapshot.model_validate_json(r[0]),
                 Criteria.model_validate_json(r[1]) if r[1] else None,
             )
             for r in rows

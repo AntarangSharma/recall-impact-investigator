@@ -246,7 +246,15 @@ def audit_source_coverage(criteria: Criteria, snapshot: Snapshot) -> None:
         expected = [(m, tuple(sorted(re.findall(r"[0-9]{4}", c)))) for m, c in groups]
         if not expected or sorted(actual) != sorted(expected):
             raise EvidenceError("Date-code groups do not faithfully cover the source clauses.")
+        if (
+            criteria.root.op != "any"
+            or len(criteria.root.children) != len(expected)
+            or any(c.op != "all" or len(c.children) != 2 for c in criteria.root.children)
+        ):
+            raise EvidenceError("Source alternatives require OR across exact model/code groups.")
     elif any(n.op == "date_code_set" for n in leaves):
         raise EvidenceError(
             "Source description does not support additional identifier constraints."
         )
+    elif not any(n.op == "serial_range" for n in leaves) and criteria.root.op != "model_set":
+        raise EvidenceError("An enumerated model list requires a single exact model set.")

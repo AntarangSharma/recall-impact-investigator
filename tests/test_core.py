@@ -229,3 +229,72 @@ def test_fixture_evaluation_denominators() -> None:
     assert result["correct"] == result["total"] == 60
     assert result["incorrect_exclusions"] == {"numerator": 0, "denominator": 21}
     assert result["correct_identifier_requests"] == {"numerator": 10, "denominator": 10}
+
+
+def test_correct_spans_do_not_authorize_wrong_boolean_semantics() -> None:
+    s = load_snapshot("23794")
+    c = fixed_criteria("23794", s)
+    c.root.op = "all"
+    with pytest.raises(EvidenceError, match="OR"):
+        validate_criteria(c, s)
+    s = load_snapshot("23130")
+    c = fixed_criteria("23130", s)
+    c.root = Rule(op="all", evidence=c.root.evidence, children=[c.root])
+    with pytest.raises(EvidenceError, match="single exact"):
+        validate_criteria(c, s)
+
+
+def test_explicit_serial_range_validation_and_unsupported_width() -> None:
+    from recall.models import Criteria, Snapshot
+
+    text = (
+        "Description: This recall involves Test air fryers with model numbers RANGE-1. "
+        "Serial numbers from 000100 through 000200 are included. Remedy: Review."
+    )
+    model_quote = "This recall involves Test air fryers with model numbers RANGE-1."
+    serial_quote = "Serial numbers from 000100 through 000200 are included."
+
+    def span(quote: str) -> Evidence:
+        start = text.index(quote)
+        return Evidence(start=start, end=start + len(quote), quote=quote)
+
+    evidence = span(text)
+    criteria = Criteria(
+        brand="Test",
+        complete=True,
+        root=Rule(
+            op="all",
+            evidence=evidence,
+            children=[
+                Rule(op="model_set", values=["RANGE-1"], evidence=span(model_quote)),
+                Rule(
+                    op="serial_range", lower="000100", upper="000200", evidence=span(serial_quote)
+                ),
+            ],
+        ),
+    )
+    snapshot = Snapshot(
+        notice_id="synthetic-range",
+        url=URLS["23794"],
+        retrieved_at="2026-10-27T00:00:00+00:00",
+        source_hash=digest(text.encode()),
+        raw_hash=digest(text.encode()),
+        text=text,
+        title="Synthetic serial grammar test",
+        complete=True,
+    )
+    validate_criteria(criteria, snapshot)
+    stock = as_stock(
+        {
+            "stock_id": "SER-1",
+            "brand": "Test",
+            "model": "RANGE-1",
+            "serial_number": "000150",
+            "location": "Test",
+        }
+    )
+    assert match(stock, snapshot, criteria).status == "affected_by_notice"
+    stock.serial_number = Identifier.parse("000250", "serial_number")
+    assert match(stock, snapshot, criteria).status == "excluded_by_notice"
+    stock.serial_number = Identifier.parse("A00150", "serial_number")
+    assert match(stock, snapshot, criteria).status == "needs_information"

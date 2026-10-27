@@ -148,6 +148,15 @@ class Investigator:
             snapshot = (
                 parse_html(target, fetch(URLS[target])) if adapter.live else load_snapshot(target)
             )
+            if not adapter.live:
+                with self.store.connect() as db:
+                    latest = db.execute(
+                        "SELECT source_hash FROM latest_snapshots WHERE notice_id=?", (target,)
+                    ).fetchone()
+                if latest and latest[0] != snapshot.source_hash:
+                    raise ModelError(
+                        "Cached fixture was superseded by a changed source; review the current version."
+                    )
             # Record source changes before inference, even when extraction later fails.
             self.store.snapshot(snapshot, None, promote=adapter.live)
             criteria = adapter.extract(snapshot)
