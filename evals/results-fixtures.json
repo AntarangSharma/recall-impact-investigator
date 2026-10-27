@@ -1,0 +1,2166 @@
+{
+  "mode": "scripted_fixture",
+  "created_at": "2026-10-27T08:16:50.910837+00:00",
+  "synthetic_cases": true,
+  "fixed_criteria_matching": {
+    "all": {
+      "correct": 60,
+      "total": 60,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 21,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 21,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 0,
+          "needs_information": 18
+        }
+      },
+      "affected_recall": {
+        "numerator": 21,
+        "denominator": 21
+      },
+      "affected_precision": {
+        "numerator": 21,
+        "denominator": 21
+      },
+      "incorrect_exclusions": {
+        "numerator": 0,
+        "denominator": 21
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 15
+      },
+      "correct_identifier_requests": {
+        "numerator": 10,
+        "denominator": 10
+      },
+      "unnecessary_requests": 0
+    },
+    "held_out_insignia": {
+      "correct": 20,
+      "total": 20,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 7,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 7,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 0,
+          "needs_information": 6
+        }
+      },
+      "affected_recall": {
+        "numerator": 7,
+        "denominator": 7
+      },
+      "affected_precision": {
+        "numerator": 7,
+        "denominator": 7
+      },
+      "incorrect_exclusions": {
+        "numerator": 0,
+        "denominator": 7
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 6
+      },
+      "correct_identifier_requests": {
+        "numerator": 3,
+        "denominator": 3
+      },
+      "unnecessary_requests": 0
+    },
+    "development": {
+      "correct": 40,
+      "total": 40,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 14,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 14,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 0,
+          "needs_information": 12
+        }
+      },
+      "affected_recall": {
+        "numerator": 14,
+        "denominator": 14
+      },
+      "affected_precision": {
+        "numerator": 14,
+        "denominator": 14
+      },
+      "incorrect_exclusions": {
+        "numerator": 0,
+        "denominator": 14
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 9
+      },
+      "correct_identifier_requests": {
+        "numerator": 7,
+        "denominator": 7
+      },
+      "unnecessary_requests": 0
+    },
+    "cases": [
+      {
+        "case_id": "23794-01",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact first model and its stated code"
+      },
+      {
+        "case_id": "23794-02",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "1903 belongs to the other model"
+      },
+      {
+        "case_id": "23794-03",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "date_code"
+        ],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "First model requires date_code"
+      },
+      {
+        "case_id": "23794-04",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact second model and first allowed code"
+      },
+      {
+        "case_id": "23794-05",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact second model and second allowed code"
+      },
+      {
+        "case_id": "23794-06",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Source parenthetical alias"
+      },
+      {
+        "case_id": "23794-07",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Source parenthetical alias"
+      },
+      {
+        "case_id": "23794-08",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Outer whitespace and case normalization"
+      },
+      {
+        "case_id": "23794-09",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Full source model notation"
+      },
+      {
+        "case_id": "23794-10",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Other model code is not transferable"
+      },
+      {
+        "case_id": "23794-11",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "First model code is not transferable"
+      },
+      {
+        "case_id": "23794-12",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Suffix changes identifier"
+      },
+      {
+        "case_id": "23794-13",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near suffix is a different identifier"
+      },
+      {
+        "case_id": "23794-14",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Leading zero preserved and outside stated set"
+      },
+      {
+        "case_id": "23794-15",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Code outside second model set"
+      },
+      {
+        "case_id": "23794-16",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "date_code"
+        ],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "Empty code is not missing column and still needs information"
+      },
+      {
+        "case_id": "23794-17",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "date_code"
+        ],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "Letter O is not numeric code"
+      },
+      {
+        "case_id": "23794-18",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "23794-19",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "23794-20",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      },
+      {
+        "case_id": "23130-01",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed exact model"
+      },
+      {
+        "case_id": "23130-02",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed suffix"
+      },
+      {
+        "case_id": "23130-03",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed suffix"
+      },
+      {
+        "case_id": "23130-04",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed S variant"
+      },
+      {
+        "case_id": "23130-05",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed CO suffix"
+      },
+      {
+        "case_id": "23130-06",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Case and whitespace"
+      },
+      {
+        "case_id": "23130-07",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Code is not required in this notice"
+      },
+      {
+        "case_id": "23130-08",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "23130-09",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "23130-10",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Meaningful hyphen removed"
+      },
+      {
+        "case_id": "23130-11",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Wrong region suffix"
+      },
+      {
+        "case_id": "23130-12",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted CO suffix"
+      },
+      {
+        "case_id": "23130-13",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted CS suffix"
+      },
+      {
+        "case_id": "23130-14",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near model only"
+      },
+      {
+        "case_id": "23130-15",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Empty model"
+      },
+      {
+        "case_id": "23130-16",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Missing model"
+      },
+      {
+        "case_id": "23130-17",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "23130-18",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Brand conflicts with model"
+      },
+      {
+        "case_id": "23130-19",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "23130-20",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      },
+      {
+        "case_id": "24159-01",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-02",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-03",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-04",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed dual basket"
+      },
+      {
+        "case_id": "24159-05",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed black oven"
+      },
+      {
+        "case_id": "24159-06",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed steel oven"
+      },
+      {
+        "case_id": "24159-07",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Case and whitespace"
+      },
+      {
+        "case_id": "24159-08",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "24159-09",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Different model generation"
+      },
+      {
+        "case_id": "24159-10",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Missing suffix digit"
+      },
+      {
+        "case_id": "24159-11",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Meaningful hyphens removed"
+      },
+      {
+        "case_id": "24159-12",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "24159-13",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near model with extra zero"
+      },
+      {
+        "case_id": "24159-14",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Different generation"
+      },
+      {
+        "case_id": "24159-15",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Empty model"
+      },
+      {
+        "case_id": "24159-16",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Missing model"
+      },
+      {
+        "case_id": "24159-17",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "24159-18",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Brand conflicts with model"
+      },
+      {
+        "case_id": "24159-19",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "24159-20",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      }
+    ]
+  },
+  "scripted_extraction_matching": {
+    "all": {
+      "correct": 60,
+      "total": 60,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 21,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 21,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 0,
+          "needs_information": 18
+        }
+      },
+      "affected_recall": {
+        "numerator": 21,
+        "denominator": 21
+      },
+      "affected_precision": {
+        "numerator": 21,
+        "denominator": 21
+      },
+      "incorrect_exclusions": {
+        "numerator": 0,
+        "denominator": 21
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 15
+      },
+      "correct_identifier_requests": {
+        "numerator": 10,
+        "denominator": 10
+      },
+      "unnecessary_requests": 0
+    },
+    "held_out_insignia": {
+      "correct": 20,
+      "total": 20,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 7,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 7,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 0,
+          "needs_information": 6
+        }
+      },
+      "affected_recall": {
+        "numerator": 7,
+        "denominator": 7
+      },
+      "affected_precision": {
+        "numerator": 7,
+        "denominator": 7
+      },
+      "incorrect_exclusions": {
+        "numerator": 0,
+        "denominator": 7
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 6
+      },
+      "correct_identifier_requests": {
+        "numerator": 3,
+        "denominator": 3
+      },
+      "unnecessary_requests": 0
+    },
+    "development": {
+      "correct": 40,
+      "total": 40,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 14,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 14,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 0,
+          "needs_information": 12
+        }
+      },
+      "affected_recall": {
+        "numerator": 14,
+        "denominator": 14
+      },
+      "affected_precision": {
+        "numerator": 14,
+        "denominator": 14
+      },
+      "incorrect_exclusions": {
+        "numerator": 0,
+        "denominator": 14
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 9
+      },
+      "correct_identifier_requests": {
+        "numerator": 7,
+        "denominator": 7
+      },
+      "unnecessary_requests": 0
+    },
+    "cases": [
+      {
+        "case_id": "23794-01",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact first model and its stated code"
+      },
+      {
+        "case_id": "23794-02",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "1903 belongs to the other model"
+      },
+      {
+        "case_id": "23794-03",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "date_code"
+        ],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "First model requires date_code"
+      },
+      {
+        "case_id": "23794-04",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact second model and first allowed code"
+      },
+      {
+        "case_id": "23794-05",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact second model and second allowed code"
+      },
+      {
+        "case_id": "23794-06",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Source parenthetical alias"
+      },
+      {
+        "case_id": "23794-07",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Source parenthetical alias"
+      },
+      {
+        "case_id": "23794-08",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Outer whitespace and case normalization"
+      },
+      {
+        "case_id": "23794-09",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Full source model notation"
+      },
+      {
+        "case_id": "23794-10",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Other model code is not transferable"
+      },
+      {
+        "case_id": "23794-11",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "First model code is not transferable"
+      },
+      {
+        "case_id": "23794-12",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Suffix changes identifier"
+      },
+      {
+        "case_id": "23794-13",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near suffix is a different identifier"
+      },
+      {
+        "case_id": "23794-14",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Leading zero preserved and outside stated set"
+      },
+      {
+        "case_id": "23794-15",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Code outside second model set"
+      },
+      {
+        "case_id": "23794-16",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "date_code"
+        ],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "Empty code is not missing column and still needs information"
+      },
+      {
+        "case_id": "23794-17",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "date_code"
+        ],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "Letter O is not numeric code"
+      },
+      {
+        "case_id": "23794-18",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "23794-19",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "23794-20",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      },
+      {
+        "case_id": "23130-01",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed exact model"
+      },
+      {
+        "case_id": "23130-02",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed suffix"
+      },
+      {
+        "case_id": "23130-03",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed suffix"
+      },
+      {
+        "case_id": "23130-04",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed S variant"
+      },
+      {
+        "case_id": "23130-05",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed CO suffix"
+      },
+      {
+        "case_id": "23130-06",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Case and whitespace"
+      },
+      {
+        "case_id": "23130-07",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Code is not required in this notice"
+      },
+      {
+        "case_id": "23130-08",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "23130-09",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "23130-10",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Meaningful hyphen removed"
+      },
+      {
+        "case_id": "23130-11",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Wrong region suffix"
+      },
+      {
+        "case_id": "23130-12",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted CO suffix"
+      },
+      {
+        "case_id": "23130-13",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted CS suffix"
+      },
+      {
+        "case_id": "23130-14",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near model only"
+      },
+      {
+        "case_id": "23130-15",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Empty model"
+      },
+      {
+        "case_id": "23130-16",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Missing model"
+      },
+      {
+        "case_id": "23130-17",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "23130-18",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Brand conflicts with model"
+      },
+      {
+        "case_id": "23130-19",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "23130-20",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      },
+      {
+        "case_id": "24159-01",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-02",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-03",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-04",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed dual basket"
+      },
+      {
+        "case_id": "24159-05",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed black oven"
+      },
+      {
+        "case_id": "24159-06",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed steel oven"
+      },
+      {
+        "case_id": "24159-07",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Case and whitespace"
+      },
+      {
+        "case_id": "24159-08",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "24159-09",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Different model generation"
+      },
+      {
+        "case_id": "24159-10",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Missing suffix digit"
+      },
+      {
+        "case_id": "24159-11",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Meaningful hyphens removed"
+      },
+      {
+        "case_id": "24159-12",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "24159-13",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near model with extra zero"
+      },
+      {
+        "case_id": "24159-14",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Different generation"
+      },
+      {
+        "case_id": "24159-15",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Empty model"
+      },
+      {
+        "case_id": "24159-16",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Missing model"
+      },
+      {
+        "case_id": "24159-17",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [
+          "model"
+        ],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "24159-18",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Brand conflicts with model"
+      },
+      {
+        "case_id": "24159-19",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "24159-20",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      }
+    ]
+  },
+  "exact_model_baseline": {
+    "all": {
+      "correct": 41,
+      "total": 60,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 21,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 5,
+          "excluded_by_notice": 16,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 11,
+          "excluded_by_notice": 3,
+          "needs_information": 4
+        }
+      },
+      "affected_recall": {
+        "numerator": 21,
+        "denominator": 21
+      },
+      "affected_precision": {
+        "numerator": 21,
+        "denominator": 37
+      },
+      "incorrect_exclusions": {
+        "numerator": 3,
+        "denominator": 19
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 15
+      },
+      "correct_identifier_requests": {
+        "numerator": 0,
+        "denominator": 10
+      },
+      "unnecessary_requests": 0
+    },
+    "held_out_insignia": {
+      "correct": 16,
+      "total": 20,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 7,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 0,
+          "excluded_by_notice": 7,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 3,
+          "excluded_by_notice": 1,
+          "needs_information": 2
+        }
+      },
+      "affected_recall": {
+        "numerator": 7,
+        "denominator": 7
+      },
+      "affected_precision": {
+        "numerator": 7,
+        "denominator": 10
+      },
+      "incorrect_exclusions": {
+        "numerator": 1,
+        "denominator": 8
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 6
+      },
+      "correct_identifier_requests": {
+        "numerator": 0,
+        "denominator": 3
+      },
+      "unnecessary_requests": 0
+    },
+    "development": {
+      "correct": 25,
+      "total": 40,
+      "confusion": {
+        "affected_by_notice": {
+          "affected_by_notice": 14,
+          "excluded_by_notice": 0,
+          "needs_information": 0
+        },
+        "excluded_by_notice": {
+          "affected_by_notice": 5,
+          "excluded_by_notice": 9,
+          "needs_information": 0
+        },
+        "needs_information": {
+          "affected_by_notice": 8,
+          "excluded_by_notice": 2,
+          "needs_information": 2
+        }
+      },
+      "affected_recall": {
+        "numerator": 14,
+        "denominator": 14
+      },
+      "affected_precision": {
+        "numerator": 14,
+        "denominator": 27
+      },
+      "incorrect_exclusions": {
+        "numerator": 2,
+        "denominator": 11
+      },
+      "false_model_matches": {
+        "numerator": 0,
+        "denominator": 9
+      },
+      "correct_identifier_requests": {
+        "numerator": 0,
+        "denominator": 7
+      },
+      "unnecessary_requests": 0
+    },
+    "cases": [
+      {
+        "case_id": "23794-01",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact first model and its stated code"
+      },
+      {
+        "case_id": "23794-02",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "1903 belongs to the other model"
+      },
+      {
+        "case_id": "23794-03",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "First model requires date_code"
+      },
+      {
+        "case_id": "23794-04",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact second model and first allowed code"
+      },
+      {
+        "case_id": "23794-05",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Exact second model and second allowed code"
+      },
+      {
+        "case_id": "23794-06",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Source parenthetical alias"
+      },
+      {
+        "case_id": "23794-07",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Source parenthetical alias"
+      },
+      {
+        "case_id": "23794-08",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Outer whitespace and case normalization"
+      },
+      {
+        "case_id": "23794-09",
+        "notice_id": "23794",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Full source model notation"
+      },
+      {
+        "case_id": "23794-10",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Other model code is not transferable"
+      },
+      {
+        "case_id": "23794-11",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "First model code is not transferable"
+      },
+      {
+        "case_id": "23794-12",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Suffix changes identifier"
+      },
+      {
+        "case_id": "23794-13",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near suffix is a different identifier"
+      },
+      {
+        "case_id": "23794-14",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Leading zero preserved and outside stated set"
+      },
+      {
+        "case_id": "23794-15",
+        "notice_id": "23794",
+        "expected": "excluded_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Code outside second model set"
+      },
+      {
+        "case_id": "23794-16",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "Empty code is not missing column and still needs information"
+      },
+      {
+        "case_id": "23794-17",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [
+          "date_code"
+        ],
+        "rationale": "Letter O is not numeric code"
+      },
+      {
+        "case_id": "23794-18",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "23794-19",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "23794-20",
+        "notice_id": "23794",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      },
+      {
+        "case_id": "23130-01",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed exact model"
+      },
+      {
+        "case_id": "23130-02",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed suffix"
+      },
+      {
+        "case_id": "23130-03",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed suffix"
+      },
+      {
+        "case_id": "23130-04",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed S variant"
+      },
+      {
+        "case_id": "23130-05",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed CO suffix"
+      },
+      {
+        "case_id": "23130-06",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Case and whitespace"
+      },
+      {
+        "case_id": "23130-07",
+        "notice_id": "23130",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Code is not required in this notice"
+      },
+      {
+        "case_id": "23130-08",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "23130-09",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "23130-10",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Meaningful hyphen removed"
+      },
+      {
+        "case_id": "23130-11",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Wrong region suffix"
+      },
+      {
+        "case_id": "23130-12",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted CO suffix"
+      },
+      {
+        "case_id": "23130-13",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted CS suffix"
+      },
+      {
+        "case_id": "23130-14",
+        "notice_id": "23130",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near model only"
+      },
+      {
+        "case_id": "23130-15",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Empty model"
+      },
+      {
+        "case_id": "23130-16",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Missing model"
+      },
+      {
+        "case_id": "23130-17",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "23130-18",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Brand conflicts with model"
+      },
+      {
+        "case_id": "23130-19",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "23130-20",
+        "notice_id": "23130",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      },
+      {
+        "case_id": "24159-01",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-02",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-03",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed fryer"
+      },
+      {
+        "case_id": "24159-04",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed dual basket"
+      },
+      {
+        "case_id": "24159-05",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed black oven"
+      },
+      {
+        "case_id": "24159-06",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Listed steel oven"
+      },
+      {
+        "case_id": "24159-07",
+        "notice_id": "24159",
+        "expected": "affected_by_notice",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Case and whitespace"
+      },
+      {
+        "case_id": "24159-08",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "24159-09",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Different model generation"
+      },
+      {
+        "case_id": "24159-10",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Missing suffix digit"
+      },
+      {
+        "case_id": "24159-11",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Meaningful hyphens removed"
+      },
+      {
+        "case_id": "24159-12",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unlisted suffix"
+      },
+      {
+        "case_id": "24159-13",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Near model with extra zero"
+      },
+      {
+        "case_id": "24159-14",
+        "notice_id": "24159",
+        "expected": "excluded_by_notice",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Different generation"
+      },
+      {
+        "case_id": "24159-15",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Empty model"
+      },
+      {
+        "case_id": "24159-16",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "needs_information",
+        "required": [],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Missing model"
+      },
+      {
+        "case_id": "24159-17",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "excluded_by_notice",
+        "required": [],
+        "expected_request": [
+          "model"
+        ],
+        "rationale": "Conflicting models"
+      },
+      {
+        "case_id": "24159-18",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Brand conflicts with model"
+      },
+      {
+        "case_id": "24159-19",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Incomplete source variant"
+      },
+      {
+        "case_id": "24159-20",
+        "notice_id": "24159",
+        "expected": "needs_information",
+        "predicted": "affected_by_notice",
+        "required": [],
+        "expected_request": [],
+        "rationale": "Unsupported condition variant"
+      }
+    ]
+  },
+  "scripted_extraction_fields": {
+    "23794": {
+      "held_out": false,
+      "correct_fields": 7,
+      "total_fields": 7,
+      "citation_valid": 9,
+      "citation_total": 9,
+      "fields": {
+        "brand": true,
+        "models": true,
+        "aliases": true,
+        "model_code_pairs": true,
+        "complete": true,
+        "unsupported": true,
+        "operators": true
+      }
+    },
+    "23130": {
+      "held_out": false,
+      "correct_fields": 7,
+      "total_fields": 7,
+      "citation_valid": 1,
+      "citation_total": 1,
+      "fields": {
+        "brand": true,
+        "models": true,
+        "aliases": true,
+        "model_code_pairs": true,
+        "complete": true,
+        "unsupported": true,
+        "operators": true
+      }
+    },
+    "24159": {
+      "held_out": true,
+      "correct_fields": 7,
+      "total_fields": 7,
+      "citation_valid": 1,
+      "citation_total": 1,
+      "fields": {
+        "brand": true,
+        "models": true,
+        "aliases": true,
+        "model_code_pairs": true,
+        "complete": true,
+        "unsupported": true,
+        "operators": true
+      }
+    }
+  },
+  "limitations": "60 synthetic cases, one prompt-tuning notice holdout. Scripted extraction is not a measurement of live model quality."
+}

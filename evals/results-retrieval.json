@@ -1,0 +1,23 @@
+[
+  {
+    "notice_id": "23794",
+    "status": "retrieved",
+    "source_hash": "b1b9badaba24cf23c923f4c0acf48cdb4ee4fdbfe3a8d1907708a12f9d2e9087",
+    "retrieved_at": "2026-10-27T08:07:27.823703+00:00",
+    "complete": true
+  },
+  {
+    "notice_id": "23130",
+    "status": "retrieved",
+    "source_hash": "f34139e9bc31794d497325b6ceeecb6a8c949b68dd3b0a8095901e4eaebac2ba",
+    "retrieved_at": "2026-10-27T08:07:28.151626+00:00",
+    "complete": true
+  },
+  {
+    "notice_id": "24159",
+    "status": "retrieved",
+    "source_hash": "31c4a560ba9baa3a6d97fbf1230ad258ed8a707ff7cfc1a457f98aa9ee359aa8",
+    "retrieved_at": "2026-10-27T08:07:28.435992+00:00",
+    "complete": true
+  }
+]

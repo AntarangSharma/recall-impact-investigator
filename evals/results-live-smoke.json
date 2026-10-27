@@ -1,0 +1,6 @@
+{
+  "status": "not_verified",
+  "error": "ModelError",
+  "reason": "Live inference requires OPENAI_API_KEY configured locally.",
+  "live_inference_verified": false
+}

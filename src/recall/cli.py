@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 from pathlib import Path
 
 from recall.agent import Investigator
@@ -46,7 +47,11 @@ def main() -> None:
     else:
         from recall.evaluation import execute
 
-        execute(args.command)
+        try:
+            execute(args.command)
+        except (RuntimeError, ValueError) as exc:
+            print(f"{args.command}: {exc}", file=sys.stderr)
+            raise SystemExit(1) from None
 
 
 if __name__ == "__main__":

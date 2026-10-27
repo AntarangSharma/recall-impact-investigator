@@ -1,5 +1,6 @@
 """Check authored text and generated reports without embedding the forbidden character."""
 
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +35,12 @@ for path in ROOT.rglob("*"):
     if path.suffix in TEXT or path.name in {"Dockerfile", "Makefile", "LICENSE", ".env.example"}:
         if chr(0x2014) in path.read_text():
             failures.append(str(path.relative_to(ROOT)))
+if (ROOT / ".git").exists():
+    history = subprocess.run(
+        ["git", "log", "--format=%B"], cwd=ROOT, text=True, capture_output=True, check=True
+    ).stdout
+    if chr(0x2014) in history:
+        failures.append("authored commit messages")
 if failures:
     raise SystemExit("Forbidden character found in: " + ", ".join(failures))
 print("First-party text and generated reports pass the forbidden-character check.")
