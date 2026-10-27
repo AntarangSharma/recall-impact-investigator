@@ -15,7 +15,7 @@ Executed on October 27, 2026. This report separates deterministic behavior, live
 | `docker inspect ...` health | Healthy |
 | `docker exec ... python scripts/container_smoke.py` | Three-row fixture clarification/resume and nine-row CSV export passed inside running image |
 | `docker exec ... python -m recall.cli eval-fixtures` | 60/60 fixed criteria and scripted pipeline inside image |
-| Clean temporary Git checkout: setup, check, test | Passed; 112 tests |
+| Clean temporary Git checkout: setup, check, test | Initial delivery: 112 tests; recheck: 128 tests with Python 3.12.9 |
 | Clean checkout: `make demo PORT=<available-port>` | Health OK, three stock rows, pending persistent identifier request |
 
 Port 8000 already belonged to another local process, so startup verification used an available port without modifying that process. The Makefile supports `PORT=8765` or another free port.
@@ -34,7 +34,7 @@ Scripted extraction has 21/21 exact field groups and 11/11 valid rule/alias cita
 
 The post-delivery recheck found and fixed duplicate identifier requests across notices, out-of-order and repeated answers entering the wrong saved interrupt, and source-change errors losing their protected status on retry. Transactional source guards now prevent stale findings or drafts from being written. Sixteen new regression cases cover those paths, invalid answer recovery, malformed CSV headers and null characters, incorrect extracted brands, complete serial-range bounds, invalidated aggregation, and HTTP responsiveness during upload work. The real browser journey also covers two sequential identifier questions and replaying the first answer while the second is pending.
 
-The recheck reran formatting, lint, strict typing, the forbidden-character scan, all 128 tests, and the complete 60-case comparison. Fixed and scripted matching remain 60/60 with zero incorrect exclusions. Live inference remains unverified because the local key was still unavailable. The updated local application preserves the original three-row investigation and its pending Secura date-code question; it uses an available port because another application owns the earlier port.
+The recheck reran formatting, lint, strict typing, the forbidden-character scan, all 128 tests, and the complete 60-case comparison. Fixed and scripted matching remain 60/60 with zero incorrect exclusions. A fresh Git checkout passed `make setup`, `make check`, `make test`, and `make demo` startup. `docker build -t recall-impact-investigator:recheck .` succeeded; the running image passed health, clarification/resume, nine-row export, and the 60-case comparison. Live inference remains unverified because the local key was still unavailable. The updated local application preserves the original three-row investigation and its pending Secura date-code question; it uses an available port because another application owns the earlier port.
 
 Tests cover grouped model/date rules, suffix and punctuation differences, missing/empty/malformed identifiers, numeric serial bounds, unsupported serial syntax, explicit exclusions, unsupported rules, invented quotes, wrong offsets, right quotes with wrong grouping or Boolean semantics, source changes, stale labels, retrieval errors/limits, redirect rejection, CSV formula injection, hostile source instructions, refusal/schema failures, model budget exhaustion, unsupported narrative claims, duplicate submissions, answer replay after a partial write, database/process restart, API exports, and browser clarification.
 
