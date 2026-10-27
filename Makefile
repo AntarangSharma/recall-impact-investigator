@@ -1,4 +1,6 @@
 UV ?= uv
+PORT ?= 8000
+export PORT
 export UV_CACHE_DIR ?= /tmp/recall-uv-cache
 .PHONY: setup demo test check eval-fixtures eval-live smoke-live refresh-data browser
 setup:
@@ -6,7 +8,7 @@ setup:
 	$(UV) run playwright install chromium
 demo:
 	$(UV) run python -m recall.cli demo
-	$(UV) run uvicorn recall.web:app --host 127.0.0.1 --port 8000
+	$(UV) run uvicorn recall.web:app --host 127.0.0.1 --port $(PORT)
 test:
 	$(UV) run pytest -q
 check:
